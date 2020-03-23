@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>deep copy</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <script>
+        function extend(obj) {
+
+            const checkType = obj => {
+                const str = Object.prototype.toString.call(obj)
+                return /\[.+\s(.+)\]/.exec(str)[1].toLocaleLowerCase()
+            }
+
+            const forEach = (arr, process) => {
+                let i = arr.length
+                while(--i >= 0) {
+                    process(arr[i], i)
+                }
+            }
+
+            let [newObj, type] = [{}, checkType(obj)]
+
+            if(type === 'object') {
+                let arr = Object.keys(obj)
+                forEach(arr, val => {
+                    newObj[val] = extend(obj[val])
+                })
+            } else if(type === 'array') {
+                newObj = []
+                forEach(obj, (val, ind) => {
+                    newObj[ind] = extend(obj[ind])
+                })
+            } else {
+                newObj = obj
+            }
+
+            return newObj
+        }
+
+        function deepCopy(obj, key = ) {
+
+        }
+
+        let aa = {
+            id: 123,
+            type: 'test',
+            list: [
+                {name: 'igo', age: 8, height: 180},
+                {name: 'ifuck', age: 16, height: 160},
+                {name: 'haha', age: 20, height: 190}
+            ]
+        }
+
+        let bb = extend(aa)
+        bb.id = 'bb123'
+        bb.list[0].name = 'bb igo'
+        console.log(aa)
+    </script>
+</body>
+</html>
