@@ -37,7 +37,7 @@ function countSrot(arr) {
 // random-随机数组/order-降序数组/same-元素相同的数组
 function createArray(n, type = 'random') {
   const arr = []
-  let i = 10000 || n
+  let i = n
   while(i > 0) {
     let random = Math.floor( Math.random() * n )
     arr.push(
@@ -80,13 +80,4 @@ runNext(
     countSrot(createArray(count))
   )
 )
-
-// 倒序
-runNext(
-  [1000000],
-  count => console.log(
-    countSrot(createArray(count))
-  )
-)
-
 console.groupEnd()
